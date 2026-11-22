@@ -1,0 +1,24 @@
+name: Plant Disease Streamlit CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  streamlit-demo:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install lightweight demo dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Compile Python source
+        run: python -m compileall -q streamlit_app.py plant_disease_labels.py plant_disease_model.py inference.py
+      - name: Run metadata and dashboard tests
+        run: python -m unittest discover -s tests -p "test_*.py" -v
