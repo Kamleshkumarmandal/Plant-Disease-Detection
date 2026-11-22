@@ -18,7 +18,7 @@ class PlantDiseaseMetadataTests(unittest.TestCase):
         self.assertEqual(IDX_TO_CLASSES[4], "Background_without_leaves")
 
     def test_disease_information_covers_all_model_classes(self):
-        info = pd.read_csv(ROOT / "disease_info.csv", encoding="cp1252")
+        info = pd.read_csv(ROOT / "disease_info.csv", encoding="utf-8")
         self.assertEqual(len(info), 39)
         self.assertEqual(info["index"].astype(int).tolist(), list(range(39)))
         self.assertTrue(info["disease_name"].notna().all())
