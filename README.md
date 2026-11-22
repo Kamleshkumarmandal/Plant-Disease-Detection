@@ -6,7 +6,7 @@ An educational plant-leaf image-classification project based on the original 39-
 
 ## Demo
 
-- **Streamlit Community Cloud: https://plant-disease-detection-ny4zezbmkqsrisxvckitqm.streamlit.app/
+- 🌱live demo: https://plant-disease-detection-ny4zezbmkqsrisxvckitqm.streamlit.app/
 - **Repository:** https://github.com/Kamleshkumarmandal/Plant-Disease-Detection
 
 ### Deploy the Streamlit preview
