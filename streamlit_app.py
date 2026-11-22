@@ -23,7 +23,7 @@ DISEASE_INFO_PATH = Path("disease_info.csv")
 @st.cache_data(show_spinner=False)
 def load_disease_information(path: str, modified_time: float) -> dict[int, dict]:
     del modified_time
-    frame = pd.read_csv(path, encoding="cp1252")
+    frame = pd.read_csv(path, encoding="utf-8")
     required = {"index", "disease_name", "description", "Possible Steps"}
     if not required.issubset(frame.columns):
         raise ValueError("Disease information CSV is missing required columns.")
