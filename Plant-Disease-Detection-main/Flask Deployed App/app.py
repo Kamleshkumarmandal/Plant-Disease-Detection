@@ -18,6 +18,7 @@ ALLOWED_EXTENSIONS = {"jpg", "jpeg", "png"}
 
 disease_info = pd.read_csv(BASE_DIR / "disease_info.csv", encoding="cp1252").set_index("index")
 supplement_info = pd.read_csv(BASE_DIR / "supplement_info.csv", encoding="cp1252").set_index("index")
+_model_cache = None
 
 app = Flask(
     __name__,
@@ -28,7 +29,10 @@ app.config["MAX_CONTENT_LENGTH"] = MAX_UPLOAD_BYTES
 
 
 def load_model():
-    """Load the trusted model checkpoint only when a prediction is requested."""
+    """Load the trusted model checkpoint once per worker process."""
+    global _model_cache
+    if _model_cache is not None:
+        return _model_cache
     if not MODEL_PATH.is_file():
         raise FileNotFoundError(
             f"Model weights not found at {MODEL_PATH}. Download the trained checkpoint and set PLANT_DISEASE_MODEL_PATH."
@@ -45,6 +49,7 @@ def load_model():
     network.load_state_dict(checkpoint, strict=True)
     network.to("cpu")
     network.eval()
+    _model_cache = network
     return network
 
 
