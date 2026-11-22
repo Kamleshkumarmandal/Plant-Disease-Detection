@@ -19,6 +19,6 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
       - name: Compile Python source
-        run: python -m compileall -q streamlit_app.py plant_disease_labels.py plant_disease_model.py inference.py
+        run: python -m compileall -q streamlit_app.py plant_disease_labels.py plant_disease_model.py inference.py "Plant-Disease-Detection-main/Flask Deployed App"
       - name: Run metadata and dashboard tests
         run: python -m unittest discover -s tests -p "test_*.py" -v
